@@ -132,7 +132,7 @@ function generateEvaluationPDF($employeeName, $position, $comments, $strengths, 
     $filePath = 'public/evaluation-pdf' . '/' . $datetime . '-' . $randomUUID . '-' . $employeeName . '-evaluation.pdf';
     
     // change this to true if you want a unique name of the pdf file
-    $isUniqueName = false;
+    $isUniqueName = true;
     $isUniqueName ? $pdf->Output('F', $filePath) : $pdf->Output('F', "evaluation.pdf");
 
 
