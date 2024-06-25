@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('table-formatter.php');
 
 // This pdf generator module takes the following parameters
 
@@ -8,9 +8,10 @@ require('fpdf/fpdf.php');
 // 3. $comments - String
 // 4. $strengths - Array of strings
 // 5. $toImproves - Array of strings
+// 5. $tableData - Two dimensional array of strings
 // the filename of the generated pdf is unique per employee
 
-class PDF extends FPDF
+class PDF extends PDF_MC_Table
 {
     function Header()
     {
@@ -32,11 +33,19 @@ class PDF extends FPDF
         }
         $this->Ln(5);
         $this->Line(20, 42, 210-20, 42);
+        $this->Ln(6);
+        $this->SetFont('Arial', 'B', '14');
+        $this->Cell(80);
+        $this->Cell(30, 10, "Results of the Students Evaluation of Teacher's Performance", 0, 0, 'C');
+        $this->Ln(6);
+        $this->Cell(80);
+        $this->Cell(30, 10, "First Semester, Academic Year 2023-2024", 0, 0, 'C');
+        $this->Ln(10);
     }
 }
 
 
-function generateEvaluationPDF($employeeName, $position, $comments, $strengths,  $toImproves){
+function generateEvaluationPDF($employeeName, $position, $comments, $strengths,  $toImproves, $tableData){
     $datetime = date('YmdHis');
     $randomUUID = uniqid();
     $legends = Array(
@@ -49,15 +58,8 @@ function generateEvaluationPDF($employeeName, $position, $comments, $strengths, 
 
     $pdf = new PDF('P', 'mm', 'A4' );
     $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', '14');
-    $pdf->Ln(6);
-    $pdf->Cell(80);
-    $pdf->Cell(30, 10, "Results of the Students Evaluation of Teacher's Performance", 0, 0, 'C');
-    $pdf->Ln(6);
-    $pdf->Cell(80);
-    $pdf->Cell(30, 10, "First Semester, Academic Year 2023-2024", 0, 0, 'C');
-    $pdf->SetFont('Arial', 'B', '11');
     $pdf->Ln(15);
+    $pdf->SetFont('Arial', 'B', '11');
     $pdf->Cell(14, 10, "Name: ", 0, 0, '');
     $pdf->SetFont('Arial', 'U', '11');
     $pdf->Cell(0, 10, $employeeName, 0, 0, '');
@@ -126,13 +128,22 @@ function generateEvaluationPDF($employeeName, $position, $comments, $strengths, 
     }
 
     // second page
-
     $pdf->AddPage();
+    $pdf->ln(10);
+    $pdf->SetWidths(Array(93, 93));
+    $pdf->SetLineHeight(5);
+
+    foreach($tableData as $item){
+        $pdf->Row(Array(
+            $item['strength'],
+            $item['weakness']
+        ));
+    }
 
     $filePath = 'public/evaluation-pdf' . '/' . $datetime . '-' . $randomUUID . '-' . $employeeName . '-evaluation.pdf';
     
     // change this to true if you want a unique name of the pdf file
-    $isUniqueName = true;
+    $isUniqueName = false;
     $isUniqueName ? $pdf->Output('F', $filePath) : $pdf->Output('F', "evaluation.pdf");
 
 
