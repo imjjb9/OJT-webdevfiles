@@ -21,7 +21,7 @@ class PDF extends FPDF
             if($x == 3){
                 $this->SetFont('Arial', 'BI', '16');
             }else{
-                $this->SetFont('Arial', 'B', '10');
+                $this->SetFont('Arial', '', '10');
             }
             // Move to the right
             $this->Cell(80);
@@ -125,10 +125,15 @@ function generateEvaluationPDF($employeeName, $position, $comments, $strengths, 
         $pdf->MultiCell(0, 6, $legends[$x], 0, 'L');
     }
 
+    // second page
+
+    $pdf->AddPage();
+
     $filePath = 'public/evaluation-pdf' . '/' . $datetime . '-' . $randomUUID . '-' . $employeeName . '-evaluation.pdf';
-
-
-    $pdf->Output('F', $filePath);
+    
+    // change this to true if you want a unique name of the pdf file
+    $isUniqueName = false;
+    $isUniqueName ? $pdf->Output('F', $filePath) : $pdf->Output('F', "evaluation.pdf");
 
 
     echo "pdf generated successfully";
