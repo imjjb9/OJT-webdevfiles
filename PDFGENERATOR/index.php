@@ -24,23 +24,24 @@ require('./utils/temporaryId-generator.php');
 
 // $ovrf->generateOvrf();
 
-$name = 'Baliguat, Justine Jerald Y.';
-  $stdNumer = '21-01530';
-  $course = 'Bachelor of Science in Computer Engineering';
-  $image = 'assets/img/profile-pic.png';
-  $instructions = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  ];
+$name = 'Baldia, John Julius';
+$stdNumer = '14-01254';
+$course = 'Bachelor of Technology and Livelihood Education Major in Information and Communication Technology';
+$image = 'assets/img/profile-pic.png';
+$instructions = [
+  'Print the generated PDF on letter-size paper (8.5" x 11") using high-quality paper.',
+  'Cut out the front and back of the ID along the guidelines, then attach the student photo.',
+  'Fill in any missing details on the ID with neat handwriting, and review for accuracy.',
+  'Laminate the ID or use an ID holder. Wear the ID at all times until the official one is issued.'
+];
 
-  $fillColor = [255, 127, 80]; //rgb color
+$fillColor = [255, 127, 80]; //rgb color
 
-  generateTemporaryId(
-    $name, $stdNumer, $image, $course, $instructions, $fillColor
-  );
-
-
-?>
+generateTemporaryId(
+  $name,
+  $stdNumer,
+  $image,
+  $course,
+  $instructions,
+  $fillColor
+);

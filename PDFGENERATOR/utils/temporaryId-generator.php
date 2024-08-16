@@ -29,10 +29,10 @@ function generateTemporaryId($name, $stdNumer, $image, $course, $instructions, $
     $pdf->Image('assets/img/cdm-logo.jpg', 42, $textStart, 10, 10);
 
     $pdf->SetFont('Arial', '', 10);
-    $pdf->MultiCell(74, 9, 'Colegio de Montalban', 0, 'R');
+    $pdf->MultiCell(74, 8, 'Colegio de Montalban', 0, 'R');
 
-    $pdf->SetFont('Arial', '', 3);
-    $pdf->MultiCell(65, -3, 'Kasiglahan Village, San Jose, Montalban, Rizal 1860', 0, 'R');
+    $pdf->SetFont('Arial', '', 4);
+    $pdf->MultiCell(73, -2, 'Kasiglahan Village, San Jose, Montalban, Rizal 1860', 0, 'R');
     
     // Front
     $pdf->RoundedRect(40, $centerY + 20, 53.98, 85.6, 3, '1234', 'D');
